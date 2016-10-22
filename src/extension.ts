@@ -3,6 +3,8 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
+import { runCommand, COMMAND_LABELS } from './commands';
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -20,6 +22,8 @@ export function activate(context: vscode.ExtensionContext) {
         // Display a message box to the user
         vscode.window.showInformationMessage('Hello World!');
     });
+
+    vscode.commands.registerCommand('extension.textPastry.1toX', () => runCommand(COMMAND_LABELS['1toX']))
 
     context.subscriptions.push(disposable);
 }
