@@ -12,7 +12,7 @@ export function runCommand (command: string) {
 
     editor.edit(editBuilder => {
         if (command === '1toX') {
-            let orderedSelections = lodashSortBy(selections, (selection: vscode.Selection) => selection.start.line);
+            let orderedSelections = lodashSortBy(selections, [ 'start.line', 'start.character' ]);
             orderedSelections.forEach((selection, index) => {
                 let range = new vscode.Position(selection.start.line, selection.start.character);
                 editBuilder.insert(range, String(index + 1));
