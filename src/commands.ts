@@ -9,19 +9,24 @@ export const COMMAND_LABELS = {
 
 export function runCommand (command: string) {
     const editor = vscode.window.activeTextEditor;
-    const { document, selections } = editor;
 
     editor.edit(editBuilder => {
-        let orderedSelections = lodashSortBy(selections, [ 'start.line', 'start.character' ]);
-        orderedSelections.forEach((selection, index) => {
-            let range = new vscode.Position(selection.start.line, selection.start.character);
+        getCursors(editBuilder).forEach((cursor, index) => {
+            let range = new vscode.Position(cursor.start.line, cursor.start.character);
             if (command === '1toX') {
                 editBuilder.insert(range, String(index + 1));
             }
             if (command === '0toX') {
                 editBuilder.insert(range, String(index));
             }
-            editBuilder.delete(selection);
+            editBuilder.delete(cursor);
         });
     });
+}
+
+function getCursors (editBuilder): vscode.Selection[] {
+    const editor = vscode.window.activeTextEditor;
+    const { document, selections } = editor;
+
+    return lodashSortBy(selections, [ 'start.line', 'start.character' ]);
 }
