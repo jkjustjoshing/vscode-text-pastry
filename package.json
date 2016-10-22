@@ -11,7 +11,8 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.textPastry.1toX"
+        "onCommand:extension.textPastry.1toX",
+        "onCommand:extension.textPastry.0toX"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -19,6 +20,10 @@
             {
                 "command": "extension.textPastry.1toX",
                 "title": "Text Pastry: 1 to X"
+            },
+            {
+                "command": "extension.textPastry.0toX",
+                "title": "Text Pastry: 0 to X"
             }
         ]
     },

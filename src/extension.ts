@@ -24,6 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     vscode.commands.registerCommand('extension.textPastry.1toX', () => runCommand(COMMAND_LABELS['1toX']))
+    vscode.commands.registerCommand('extension.textPastry.0toX', () => runCommand(COMMAND_LABELS['0toX']))
 
     context.subscriptions.push(disposable);
 }

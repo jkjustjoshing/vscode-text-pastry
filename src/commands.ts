@@ -3,7 +3,8 @@ import * as vscode from 'vscode';
 const lodashSortBy = require('lodash.sortby');
 
 export const COMMAND_LABELS = {
-    '1toX': '1toX'
+    '1toX': '1toX',
+    '0toX': '0toX'
 };
 
 export function runCommand (command: string) {
@@ -11,13 +12,16 @@ export function runCommand (command: string) {
     const { document, selections } = editor;
 
     editor.edit(editBuilder => {
-        if (command === '1toX') {
-            let orderedSelections = lodashSortBy(selections, [ 'start.line', 'start.character' ]);
-            orderedSelections.forEach((selection, index) => {
-                let range = new vscode.Position(selection.start.line, selection.start.character);
+        let orderedSelections = lodashSortBy(selections, [ 'start.line', 'start.character' ]);
+        orderedSelections.forEach((selection, index) => {
+            let range = new vscode.Position(selection.start.line, selection.start.character);
+            if (command === '1toX') {
                 editBuilder.insert(range, String(index + 1));
-                editBuilder.delete(selection);
-            });
-        }
+            }
+            if (command === '0toX') {
+                editBuilder.insert(range, String(index));
+            }
+            editBuilder.delete(selection);
+        });
     });
 }
