@@ -26,7 +26,7 @@ export function promptRange (prompt: string = 'Where should the range start?'): 
             }
             let num: number = +result;
             if (isNaN(num)) {
-                resolve(promptRange(`"${result}" is an invalid number. Where should the range start?`));
+                resolve(promptRange(`"${result}" is an invalid number. Enter a number.`));
             }
             resolve(num);
         });
@@ -50,4 +50,14 @@ export function range_0toX (count: number): string[] {
 
 export function range_1toX (count: number): string[] {
     return range_generic(1)(count);
+}
+
+export function range_AtoX (count: number): string[] {
+    let a: string[] = [];
+    let startCode = 'a'.charCodeAt(0);
+    for (let i = 0; i < count; ++i) {
+        const offset = i % 26; // only loop through lower case a-z
+        a.push(String.fromCharCode(startCode + offset));
+    }
+    return a;
 }

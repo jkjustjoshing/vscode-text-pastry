@@ -13,6 +13,7 @@
     "activationEvents": [
         "onCommand:extension.textPastry.1toX",
         "onCommand:extension.textPastry.0toX",
+        "onCommand:extension.textPastry.AtoX",
         "onCommand:extension.textPastry.range"
     ],
     "main": "./out/src/extension",
@@ -25,6 +26,10 @@
             {
                 "command": "extension.textPastry.0toX",
                 "title": "Text Pastry: 0 to X"
+            },
+            {
+                "command": "extension.textPastry.AtoX",
+                "title": "Text Pastry: A to X"
             },
             {
                 "command": "extension.textPastry.range",
