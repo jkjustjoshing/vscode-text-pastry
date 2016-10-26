@@ -2,7 +2,7 @@
   "name": "vscode-text-pastry",
   "displayName": "Text Pastry",
   "description": "Extend the power of multiple selections in VS Code. Modify selections, insert numeric sequences, incremental numbers, generate uuids, date ranges, insert continuously from a word list and more.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "jkjustjoshing",
   "engines": {
     "vscode": "^1.5.0"
