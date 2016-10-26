@@ -2,6 +2,7 @@
 
 import * as vscode from 'vscode';
 import { getCursors } from './utils';
+import * as uuid from 'uuid';
 
 export function range (rangeMethod: (number) => string[]) {
     const editor = vscode.window.activeTextEditor;
@@ -58,6 +59,14 @@ export function range_AtoX (count: number): string[] {
     for (let i = 0; i < count; ++i) {
         const offset = i % 26; // only loop through lower case a-z
         a.push(String.fromCharCode(startCode + offset));
+    }
+    return a;
+}
+
+export function range_uuid (count: number): string[] {
+    let a: string[] = [];
+    for (let i = 0; i < count; ++i) {
+        a.push(uuid.v4().toLowerCase());
     }
     return a;
 }
