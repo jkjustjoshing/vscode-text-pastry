@@ -18,32 +18,42 @@ export function range (rangeMethod: (number) => string[]) {
     });
 }
 
-export function promptRange (prompt: string = 'Where should the range start?'): Promise<number> {
+export function promptRange(
+    prompt: string = 'Please input "start [step]" values'): Promise<{start: number, step: number}> {
     return new Promise((resolve, reject) => {
         return vscode.window.showInputBox({ prompt }).then(result => {
             if (result == null) {
-                // User cancelled
                 reject();
             }
-            let num: number = +result;
-            if (isNaN(num)) {
-                resolve(promptRange(`"${result}" is an invalid number. Enter a number.`));
+
+            const inputs = result.split(' ');
+            let start: number = +inputs[0];
+            let step: number = inputs.length >= 2 ? +inputs[1] : 1;
+
+            if (isNaN(start)) {
+                resolve(promptRange(`Start "${start}" is an invalid number. Please enter a number.`));
             }
-            resolve(num);
+            if (isNaN(step)) {
+                resolve(promptRange(`Step "${step}" is an invalid number. Please enter a number`));
+            }
+            resolve({ start, step });
         });
     });
 };
 
-export function range_generic (start: number): (number) => string[] {
+export function range_generic(start: number, step: number = 1): (number) => string[] {
     return function (count: number): string[] {
         let a: string[] = [];
-        let end = count + start;
-        for (let i = start; i < end; ++i) {
+        let i = start;
+
+        while (count-- > 0) {
             a.push(String(i));
+            i += step;
         }
+
         return a;
-    };
-}
+    }
+};
 
 export function range_0toX (count: number): string[] {
     return range_generic(0)(count);

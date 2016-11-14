@@ -11,8 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('extension.textPastry.1toX', () => rangeMethods.range(rangeMethods.range_1toX)),
         vscode.commands.registerCommand('extension.textPastry.0toX', () => rangeMethods.range(rangeMethods.range_0toX)),
         vscode.commands.registerCommand('extension.textPastry.AtoX', () => rangeMethods.range(rangeMethods.range_AtoX)),
-        vscode.commands.registerCommand('extension.textPastry.range', () => rangeMethods.promptRange().then(range => rangeMethods.range(rangeMethods.range_generic(range)))),
-
+        vscode.commands.registerCommand('extension.textPastry.range', () => rangeMethods.promptRange().then(obj => rangeMethods.range(rangeMethods.range_generic(obj.start, obj.step)))),
         vscode.commands.registerCommand('extension.textPastry.uuid', () => rangeMethods.range(rangeMethods.range_uuid))
     ];
 
