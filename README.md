@@ -1,7 +1,5 @@
 # Text Pastry for VS Code
 
-[VSCode Text Pastry Readme](https://github.com/jkjustjoshing/vscode-text-pastry)
-
 Text Pastry lets you reduce repetitive work and use multiple cursors more effectively in VS Code.
 
 This extension is based on the [Text Pastry extension for Sublime Text](https://github.com/duydao/Text-Pastry). From their readme:
