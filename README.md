@@ -1,4 +1,4 @@
-# vscode-text-pastry README
+# Text Pastry for VS Code
 
 [VSCode Text Pastry Readme](https://github.com/jkjustjoshing/vscode-text-pastry)
 
