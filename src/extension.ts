@@ -2,6 +2,7 @@
 
 import * as vscode from 'vscode';
 import * as rangeMethods from './rangeMethods';
+import * as utils from './utils';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -12,6 +13,10 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('extension.textPastry.0toX', () => rangeMethods.range(rangeMethods.range_0toX)),
         vscode.commands.registerCommand('extension.textPastry.AtoX', () => rangeMethods.range(rangeMethods.range_AtoX)),
         vscode.commands.registerCommand('extension.textPastry.range', () => rangeMethods.promptRange().then(range => rangeMethods.range(rangeMethods.range_generic(range)))),
+
+        vscode.commands.registerCommand('extension.textPastry.paste', () => utils.getClipboardLines().then(lines => {
+            return rangeMethods.range(lines);
+        })),
 
         vscode.commands.registerCommand('extension.textPastry.uuid', () => rangeMethods.range(rangeMethods.range_uuid))
     ];
