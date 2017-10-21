@@ -8,12 +8,12 @@
     "vscode": "^1.5.0"
   },
   "repository": {
-      "type": "git",
-      "url": "https://github.com/jkjustjoshing/vscode-text-pastry"
+    "type": "git",
+    "url": "https://github.com/jkjustjoshing/vscode-text-pastry"
   },
   "bugs": {
-      "url": "https://github.com/jkjustjoshing/vscode-text-pastry/issues",
-      "email": "jkjustjoshing@gmail.com"
+    "url": "https://github.com/jkjustjoshing/vscode-text-pastry/issues",
+    "email": "jkjustjoshing@gmail.com"
   },
   "categories": [
     "Other"
@@ -23,6 +23,7 @@
     "onCommand:extension.textPastry.0toX",
     "onCommand:extension.textPastry.AtoX",
     "onCommand:extension.textPastry.range",
+    "onCommand:extension.textPastry.paste",
     "onCommand:extension.textPastry.uuid"
   ],
   "main": "./out/src/extension",
@@ -43,6 +44,10 @@
       {
         "command": "extension.textPastry.range",
         "title": "Text Pastry: Range"
+      },
+      {
+        "command": "extension.textPastry.paste",
+        "title": "Text Pastry: Paste Lines"
       },
       {
         "command": "extension.textPastry.uuid",
