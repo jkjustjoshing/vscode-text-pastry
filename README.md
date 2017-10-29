@@ -17,6 +17,11 @@ This project is very barebones at the moment. There are a few basic feature issu
 
 ## Release Notes
 
-### 1.0.0
+### 1.2.0
+Add "Paste Lines" feature
 
+### 1.1.0
+Add UUID, A-X range, generic range features
+
+### 1.0.0
 Initial release of Text Pastry for VS Code
