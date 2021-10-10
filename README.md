@@ -17,6 +17,9 @@ This project is very barebones at the moment. There are a few basic feature issu
 
 ## Release Notes
 
+### 1.3.0
+Add "Word List" feature
+
 ### 1.2.0
 Add "Paste Lines" feature
 
