@@ -24,7 +24,8 @@
     "onCommand:extension.textPastry.AtoX",
     "onCommand:extension.textPastry.range",
     "onCommand:extension.textPastry.paste",
-    "onCommand:extension.textPastry.uuid"
+    "onCommand:extension.textPastry.uuid",
+    "onCommand:extension.textPastry.wordList"
   ],
   "main": "./out/src/extension",
   "contributes": {
@@ -52,6 +53,10 @@
       {
         "command": "extension.textPastry.uuid",
         "title": "Text Pastry: uuid"
+      },
+      {
+        "command": "extension.textPastry.wordList",
+        "title": "Text Pastry: Word List"
       }
     ]
   },
