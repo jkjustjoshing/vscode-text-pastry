@@ -40,6 +40,19 @@ export function promptRange (prompt: string = 'Where should the range start?'): 
     });
 };
 
+export function promptWordList (prompt: string = 'List of words (space separated)'): Promise<string[]> {
+    return new Promise((resolve, reject) => {
+        return vscode.window.showInputBox({ prompt }).then(result => {
+            if (result == null) {
+                // User cancelled
+                reject();
+            }
+            const words = result.split(/\s+/)
+            resolve(words);
+        });
+    });
+};
+
 export function range_generic (start: number): (number) => string[] {
     return function (count: number): string[] {
         let a: string[] = [];

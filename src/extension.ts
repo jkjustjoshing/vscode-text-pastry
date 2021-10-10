@@ -13,6 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('extension.textPastry.0toX', () => rangeMethods.range(rangeMethods.range_0toX)),
         vscode.commands.registerCommand('extension.textPastry.AtoX', () => rangeMethods.range(rangeMethods.range_AtoX)),
         vscode.commands.registerCommand('extension.textPastry.range', () => rangeMethods.promptRange().then(range => rangeMethods.range(rangeMethods.range_generic(range)))),
+        vscode.commands.registerCommand('extension.textPastry.wordList', () => rangeMethods.promptWordList().then(list => rangeMethods.range(list))),
 
         vscode.commands.registerCommand('extension.textPastry.paste', () => utils.getClipboardLines().then(lines => {
             return rangeMethods.range(lines);
