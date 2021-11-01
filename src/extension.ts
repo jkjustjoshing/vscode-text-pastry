@@ -12,8 +12,22 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.registerCommand('extension.textPastry.1toX', () => rangeMethods.range(rangeMethods.range_1toX)),
         vscode.commands.registerCommand('extension.textPastry.0toX', () => rangeMethods.range(rangeMethods.range_0toX)),
         vscode.commands.registerCommand('extension.textPastry.AtoX', () => rangeMethods.range(rangeMethods.range_AtoX)),
-        vscode.commands.registerCommand('extension.textPastry.range', () => rangeMethods.promptRange().then(range => rangeMethods.range(rangeMethods.range_generic(range)))),
-        vscode.commands.registerCommand('extension.textPastry.wordList', () => rangeMethods.promptWordList().then(list => rangeMethods.range(list))),
+        vscode.commands.registerCommand('extension.textPastry.range', async () => {
+            try {
+                const range = await rangeMethods.promptRange()
+                return rangeMethods.range(rangeMethods.range_generic(range))
+            } catch (e) {
+                // Swallow errors
+            }
+        }),
+        vscode.commands.registerCommand('extension.textPastry.wordList', async () => {
+            try {
+                const list = await rangeMethods.promptWordList()
+                return rangeMethods.range(list)
+            } catch (e) {
+                // Swallow errors
+            }
+        }),
 
         vscode.commands.registerCommand('extension.textPastry.paste', () => utils.getClipboardLines().then(lines => {
             return rangeMethods.range(lines);
