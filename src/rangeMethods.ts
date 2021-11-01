@@ -24,33 +24,28 @@ export function range (rangeMethod: (string[] | ((number) => string[]))) {
     });
 }
 
-export function promptRange (prompt: string = 'Where should the range start?'): Promise<number> {
-    return new Promise((resolve, reject) => {
-        return vscode.window.showInputBox({ prompt }).then(result => {
-            if (result === null || result === undefined) {
-                // User cancelled
-                return reject();
-            }
-            let num: number = +result;
-            if (isNaN(num)) {
-                resolve(promptRange(`"${result}" is an invalid number. Enter a number.`));
-            }
-            resolve(num);
-        });
-    });
+export async function promptRange (prompt: string = 'Where should the range start?'): Promise<number> {
+    const result = await vscode.window.showInputBox({ prompt });
+    if (result === null || result === undefined) {
+        // User cancelled
+        throw new Error();
+    }
+    let num: number = +result;
+    if (isNaN(num)) {
+        return promptRange(`"${result}" is an invalid number. Enter a number.`);
+    }
+    return num;
 };
 
-export function promptWordList (prompt: string = 'List of words (space separated)'): Promise<string[]> {
-    return new Promise((resolve, reject) => {
-        return vscode.window.showInputBox({ prompt }).then(result => {
-            if (result === null || result === undefined) {
-                // User cancelled
-                return reject();
-            }
-            const words = result.split(/\s+/)
-            resolve(words);
-        });
-    });
+export async function promptWordList (prompt: string = 'List of words (space separated)'): Promise<string[]> {
+    const result = await vscode.window.showInputBox({ prompt });
+
+    if (result === null || result === undefined) {
+        // User cancelled
+        throw new Error();
+    }
+    const words = result.split(/\s+/)
+    return words;
 };
 
 export function range_generic (start: number): (number) => string[] {
