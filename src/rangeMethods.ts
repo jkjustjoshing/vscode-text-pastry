@@ -27,9 +27,9 @@ export function range (rangeMethod: (string[] | ((number) => string[]))) {
 export function promptRange (prompt: string = 'Where should the range start?'): Promise<number> {
     return new Promise((resolve, reject) => {
         return vscode.window.showInputBox({ prompt }).then(result => {
-            if (result == null) {
+            if (result === null || result === undefined) {
                 // User cancelled
-                reject();
+                return reject();
             }
             let num: number = +result;
             if (isNaN(num)) {
@@ -43,9 +43,9 @@ export function promptRange (prompt: string = 'Where should the range start?'): 
 export function promptWordList (prompt: string = 'List of words (space separated)'): Promise<string[]> {
     return new Promise((resolve, reject) => {
         return vscode.window.showInputBox({ prompt }).then(result => {
-            if (result == null) {
+            if (result === null || result === undefined) {
                 // User cancelled
-                reject();
+                return reject();
             }
             const words = result.split(/\s+/)
             resolve(words);
