@@ -17,6 +17,9 @@ This project is very barebones at the moment. There are a few basic feature issu
 
 ## Release Notes
 
+### 1.3.1
+Bugfix: when cancelling out of "Word List" or "Range", don't throw an error
+
 ### 1.3.0
 Add "Word List" feature
 
