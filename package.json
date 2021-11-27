@@ -2,7 +2,7 @@
   "name": "vscode-text-pastry",
   "displayName": "Text Pastry",
   "description": "Extend the power of multiple selections in VS Code. Modify selections, insert numeric sequences, incremental numbers, generate uuids, date ranges, insert continuously from a word list and more.",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "publisher": "jkjustjoshing",
   "engines": {
     "vscode": "^1.5.0"
@@ -25,7 +25,10 @@
     "onCommand:extension.textPastry.range",
     "onCommand:extension.textPastry.paste",
     "onCommand:extension.textPastry.uuid",
-    "onCommand:extension.textPastry.wordList"
+    "onCommand:extension.textPastry.wordList",
+    "onCommand:extension.textPastry.1toX_random",
+    "onCommand:extension.textPastry.XtoY_random"
+
   ],
   "main": "./out/src/extension",
   "contributes": {
@@ -57,7 +60,15 @@
       {
         "command": "extension.textPastry.wordList",
         "title": "Text Pastry: Word List"
-      }
+      },
+      {
+        "command": "extension.textPastry.1toX_random",
+        "title": "Text Pastry: Random numbers from 1 to X"
+      },
+      {
+        "command": "extension.textPastry.XtoY_random",
+        "title": "Text Pastry: Random numbers from X to Y"
+      } 
     ]
   },
   "scripts": {

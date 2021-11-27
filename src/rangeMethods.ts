@@ -59,6 +59,38 @@ export function range_generic (start: number): (number) => string[] {
     };
 }
 
+export function randomIntFromInterval(min, max) { // min and max included
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+
+export function random_generic (start: number): (number) => string[] {
+    return function (count: number): string[] {
+        let a: string[] = [];
+        let end = count + start;
+        for (let i = start; i < end; ++i) {
+            a.push(String(randomIntFromInterval(start, end)));
+        }
+        return a;
+    };
+}
+
+export async function promptRandomMinMax (
+    prompt: string = 'Enter the min and max values (space seperated)'
+    ): Promise<string[]> {
+    const result = await vscode.window.showInputBox({ prompt });
+
+    if (result === null || result === undefined) {
+        // User cancelled
+        throw new Error();
+    }
+    const words = result.split(/\s+/)
+    return random_generic(+words[0])(+words[1]);
+};
+
+export function random_1toX (count: number): string[] {
+    return random_generic(1)(count);
+}
+    
 export function range_0toX (count: number): string[] {
     return range_generic(0)(count);
 }
