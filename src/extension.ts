@@ -33,7 +33,19 @@ export function activate(context: vscode.ExtensionContext) {
             return rangeMethods.range(lines);
         })),
 
-        vscode.commands.registerCommand('extension.textPastry.uuid', () => rangeMethods.range(rangeMethods.range_uuid))
+        vscode.commands.registerCommand('extension.textPastry.uuid', () => rangeMethods.range(rangeMethods.range_uuid)),
+
+        vscode.commands.registerCommand('extension.textPastry.1toX_random', () => rangeMethods.range(rangeMethods.random_1toX)),
+
+        vscode.commands.registerCommand('extension.textPastry.XtoY_random', async () => {
+            try {
+                const list = await rangeMethods.promptRandomMinMax()
+                return rangeMethods.range(list)
+            } catch (e) {
+                // Swallow errors
+            }
+        }),
+
     ];
 
     context.subscriptions.push(...disposables);
