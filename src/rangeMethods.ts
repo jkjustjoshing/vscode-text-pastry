@@ -1,11 +1,11 @@
 "use strict";
 
-import * as vscode from "vscode";
+import { window as vscodeWindow, Position } from "vscode";
 import { getCursors } from "./utils";
-import * as uuid from "uuid";
+import { v4 as uuid } from "uuid";
 
 export function range(rangeMethod: string[] | ((number) => string[])) {
-	const editor = vscode.window.activeTextEditor;
+	const editor = vscodeWindow.activeTextEditor;
 
 	editor.edit((editBuilder) => {
 		let cursors = getCursors(editBuilder);
@@ -16,10 +16,7 @@ export function range(rangeMethod: string[] | ((number) => string[])) {
 			itemsToInsert = rangeMethod;
 		}
 		cursors.forEach((selection, index) => {
-			let range = new vscode.Position(
-				selection.start.line,
-				selection.start.character
-			);
+			let range = new Position(selection.start.line, selection.start.character);
 			editBuilder.insert(range, itemsToInsert[index]);
 			editBuilder.delete(selection);
 		});
@@ -29,7 +26,7 @@ export function range(rangeMethod: string[] | ((number) => string[])) {
 export async function promptRange(
 	prompt: string = "Where should the range start?"
 ): Promise<number> {
-	const result = await vscode.window.showInputBox({ prompt });
+	const result = await vscodeWindow.showInputBox({ prompt });
 	if (result === null || result === undefined) {
 		// User cancelled
 		throw new Error();
@@ -44,7 +41,7 @@ export async function promptRange(
 export async function promptWordList(
 	prompt: string = "List of words (space separated)"
 ): Promise<string[]> {
-	const result = await vscode.window.showInputBox({ prompt });
+	const result = await vscodeWindow.showInputBox({ prompt });
 
 	if (result === null || result === undefined) {
 		// User cancelled
@@ -86,7 +83,7 @@ export function range_AtoX(count: number): string[] {
 export function range_uuid(count: number): string[] {
 	let a: string[] = [];
 	for (let i = 0; i < count; ++i) {
-		a.push(uuid.v4().toLowerCase());
+		a.push(uuid().toLowerCase());
 	}
 	return a;
 }

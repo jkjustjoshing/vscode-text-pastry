@@ -27,7 +27,8 @@
     "onCommand:extension.textPastry.uuid",
     "onCommand:extension.textPastry.wordList"
   ],
-  "main": "./out/src/extension",
+  "main": "./out/main.js",
+  "browser": "./out/browser.js",
   "contributes": {
     "commands": [
       {
@@ -61,14 +62,19 @@
     ]
   },
   "scripts": {
-    "vscode:prepublish": "tsc -p ./",
-    "compile": "tsc -watch -p ./"
+    "vscode:prepublish": "npm run esbuild-base -- --minify && npm run esbuild-browser -- --minify",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+    "esbuild-browser": "esbuild ./src/extension.ts --bundle --outfile=out/browser.js --external:vscode --format=cjs --platform=browser",
+    "esbuild": "npm run esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+    "test-compile": "tsc -p ./"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.48",
     "@types/node": "^6.14.13",
     "@types/uuid": "^2.0.32",
     "@types/vscode": "^1.72.0",
+    "esbuild": "^0.15.11",
     "mocha": "^10.0.0",
     "prettier": "2.7.1",
     "typescript": "^4.8.4"
