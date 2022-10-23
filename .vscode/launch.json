@@ -29,11 +29,12 @@
 			"request": "launch",
 			"runtimeExecutable": "${execPath}",
 			"args": [
-				"--extensionDevelopmentPath=${workspaceRoot}",
-				"--extensionTestsPath=${workspaceRoot}/out/test"
+				"--disable-extensions",
+				"--extensionDevelopmentPath=${workspaceFolder}",
+				"--extensionTestsPath=${workspaceFolder}/out/test/suite/index"
 			],
-			"sourceMaps": true,
-			"preLaunchTask": "npm"
+			"preLaunchTask": "npm: pretest",
+			"outFiles": ["${workspaceFolder}/out/test/**/*.js"]
 		}
 	]
 }
