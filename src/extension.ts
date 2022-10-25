@@ -2,45 +2,50 @@
 
 import * as vscode from "vscode";
 import * as rangeMethods from "./rangeMethods";
-import * as utils from "./utils";
+import { getCommandGenerator } from "./command";
+import { applyGeneratorToCursors } from "./utils";
 
 export function activate(context: vscode.ExtensionContext) {
 	console.log('Extension "vscode-text-pastry" is now active!');
 
 	let disposables = [
-		vscode.commands.registerCommand("extension.textPastry.1toX", () =>
-			rangeMethods.range(rangeMethods.range_1toX)
+		vscode.commands.registerCommand("extension.textPastry.1toX", async () =>
+			applyGeneratorToCursors(
+				await getCommandGenerator({ type: "i", start: 1, inc: 1 })
+			)
 		),
-		vscode.commands.registerCommand("extension.textPastry.0toX", () =>
-			rangeMethods.range(rangeMethods.range_0toX)
+		vscode.commands.registerCommand("extension.textPastry.0toX", async () =>
+			applyGeneratorToCursors(
+				await getCommandGenerator({ type: "i", start: 0, inc: 1 })
+			)
 		),
 		vscode.commands.registerCommand("extension.textPastry.AtoX", () =>
 			rangeMethods.range(rangeMethods.range_AtoX)
 		),
 		vscode.commands.registerCommand("extension.textPastry.range", async () => {
-			try {
+			// try {
 				const range = await rangeMethods.promptRange();
-				return rangeMethods.range(rangeMethods.range_generic(range));
-			} catch (e) {
-				// Swallow errors
-			}
+			applyGeneratorToCursors(await getCommandGenerator(range));
+			// } catch (e) {
+			// 	// Swallow errors
+			// }
 		}),
 		vscode.commands.registerCommand(
 			"extension.textPastry.wordList",
 			async () => {
-				try {
+				// try {
 					const list = await rangeMethods.promptWordList();
-					return rangeMethods.range(list);
-				} catch (e) {
-					// Swallow errors
-				}
+				return applyGeneratorToCursors(await getCommandGenerator(list));
+				// } catch (e) {
+				// 	// Swallow errors
+				// }
 			}
 		),
 
-		vscode.commands.registerCommand("extension.textPastry.paste", () =>
-			utils.getClipboardLines().then((lines) => {
-				return rangeMethods.range(lines);
-			})
+		vscode.commands.registerCommand("extension.textPastry.paste", async () =>
+			applyGeneratorToCursors(
+				await getCommandGenerator({ type: "p", delimiter: "\n" })
+			)
 		),
 
 		vscode.commands.registerCommand("extension.textPastry.uuid", () =>

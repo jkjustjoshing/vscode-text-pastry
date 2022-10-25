@@ -2,6 +2,7 @@
 
 import { window as vscodeWindow, Position } from "vscode";
 import { getCursors } from "./utils";
+import type { Command } from "./command";
 import { v4 as uuid } from "uuid";
 
 export function range(rangeMethod: string[] | ((number) => string[])) {
@@ -25,7 +26,7 @@ export function range(rangeMethod: string[] | ((number) => string[])) {
 
 export async function promptRange(
 	prompt: string = "Where should the range start?"
-): Promise<number> {
+): Promise<Command> {
 	const result = await vscodeWindow.showInputBox({ prompt });
 	if (result === null || result === undefined) {
 		// User cancelled
@@ -35,12 +36,12 @@ export async function promptRange(
 	if (isNaN(num)) {
 		return promptRange(`"${result}" is an invalid number. Enter a number.`);
 	}
-	return num;
+	return { type: "i", start: num, inc: 1 };
 }
 
 export async function promptWordList(
 	prompt: string = "List of words (space separated)"
-): Promise<string[]> {
+): Promise<Command> {
 	const result = await vscodeWindow.showInputBox({ prompt });
 
 	if (result === null || result === undefined) {
@@ -48,7 +49,7 @@ export async function promptWordList(
 		throw new Error();
 	}
 	const words = result.split(/\s+/);
-	return words;
+	return { type: "list", list: words };
 }
 
 export function range_generic(start: number): (number) => string[] {
